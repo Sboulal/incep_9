@@ -1,0 +1,22 @@
+version : "3.3"
+
+services:
+  mariadb:
+    container_name: "mariadb"
+    image: "mariadb:inception"
+    build: ./requirements/mariadb/
+    restart: on-failure
+    volumes:
+      - DB:/var/lib/mysql
+   env_file:
+      - .env
+    networks:
+      - net_backend
+
+volumes :
+  DB:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/salma/data/mariadb
